@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteBase /
+RewriteRule ^(.*)$ http://127.0.0.1:62479/$1 [P]
+ 
+RequestHeader set X-Forwarded-Proto https env=HTTPS
