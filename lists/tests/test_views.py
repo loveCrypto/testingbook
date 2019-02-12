@@ -1,6 +1,7 @@
 from django.test import TestCase
 from lists.models import Item, List
 from django.utils.html import escape
+from lists.forms import ItemForm
 
 
 class ListViewTest(TestCase):
@@ -89,3 +90,10 @@ class NewListTest(TestCase):
         self.client.post('/lists/new', data={'item_text': ''})
         self.assertEqual(List.objects.count(), 0)
         self.assertEqual(Item.objects.count(), 0)
+
+
+class HomePageTest(TestCase):
+
+    def test_home_page_uses_item_form(self):
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm)
